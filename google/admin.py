@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import LoadTimes
+from .models import TestSites
 
-admin.site.register(LoadTimes)
+admin.site.register(TestSites)
