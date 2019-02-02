@@ -17,7 +17,8 @@ def index(request):
         height=900,
         width=1600,
         explicit_size=True,
-        style=DarkStyle
+        style=DarkStyle,
+        x_label_rotation=20
     ).generate()
 
     return render(request, 'base.html', {'page_title': 'Load Times', 'cht': load_chart})
@@ -38,7 +39,8 @@ class LoadChart(object):
 
     def get_data(self):
         data = {}
-        for loadtime in LoadTimes.objects.all():
+        # Get the last 20 load times, then reverse.
+        for loadtime in LoadTimes.objects.all().order_by('-id')[:20][::-1]:
             data[loadtime.timestamp] = loadtime.latency
         return data
 
